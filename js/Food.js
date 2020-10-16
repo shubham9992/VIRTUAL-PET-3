@@ -1,26 +1,22 @@
 class Food{
     constructor(){
-        var foodStock,lastFed;
+        this.foodStock=this.lastFed=0;
         this.image=loadImage("images/Milk.png");
     }
 
     getFoodStock(){
-        console.log("before "+Food);
-        var getFoodStockRef=database.ref('Food');
-        getFoodStockRef.on("value",function (data) {
-            Food=data.val();
-        });
-        console.log("after "+Food);
+        return this.foodStock;
     }
 
     updateFoodStock(foodUpdate){
-        database.ref('/').update({
-            Food:foodUpdate
-        })
+        this.foodStock=foodUpdate;
     }
 
     deductFood(){
-        
+        if(this.foodStock>0){
+            this.foodStock-=1;
+        }
+
     }
     
     display(){
@@ -30,7 +26,7 @@ class Food{
         image(this.image,720,220,70,70);
 
         if(this.foodStock!=0){
-            for(var i=0;i<foodStock;i++){
+            for(var i=0;i<this.foodStock;i++){
                 if(i%10===0){
                     x=80;
                     y+=50;
@@ -42,14 +38,20 @@ class Food{
     }
 
     bedroom(){
-        background(bedroom,550,500);
+        // imageMode(CENTER);
+        // image(bedroom, 0.5*width, 0.5*height,width, height ); // to fit width
+       background(bedroom,550,500,width,height);
     }
 
     garden(){
-        background(garden,550,500);
+        // imageMode(CENTER);
+        // image(garden, 0.5*width, 0.5*height, width, height); // to fit width
+        background(garden,550,500,width,height);
     }
 
     washroom(){
+        // imageMode(CENTER);
+        // image(washroom, 0.5*width, 0.5*height, width, height); // to fit width
         background(washroom,550,500);
     }
 }
